@@ -1,0 +1,23 @@
+{
+  "name": "week8",
+  "version": "1.0.0",
+  "description": "Week 8",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fimanishi/DigitalCrafts-Week8.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fimanishi/DigitalCrafts-Week8/issues"
+  },
+  "homepage": "https://github.com/fimanishi/DigitalCrafts-Week8#readme",
+  "dependencies": {
+    "pg-promise": "^5.9.0",
+    "prompt-promise": "^1.0.3"
+  }
+}
