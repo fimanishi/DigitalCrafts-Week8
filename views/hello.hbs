@@ -1,0 +1,14 @@
+
+<p>
+  {{{content}}}
+</p>
+<ul>
+  {{#each friends}}
+  <li>
+    {{name}}
+    {{# if age}}
+      - you are {{age}}
+    {{/if}}
+  </li>
+  {{/each}}
+</ul>
