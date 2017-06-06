@@ -1,6 +1,18 @@
 var express = require('express')
 var app = express();
+var body_parser = require('body-parser');
 
+var promise = require("bluebird");
+var pgp = require('pg-promise')({
+  promiseLib: promise
+  // initialization options
+});
+
+var db = pgp({database: 'restaurant'});
+// nodemon for server
+
+// imports body-parser
+app.use(body_parser.urlencoded({extended: false}));
 
 // imports hbs
 app.set("view engine", "hbs");
@@ -71,9 +83,32 @@ app.get("/fav_animals", function(request, response){
     ],
   }
   response.render("fav_animals.hbs", context);
-})
+});
 
+app.get("/form", function(request, response){
+  response.render("form.hbs");
+});
 
+app.get("/thank-you", function(request, response){
+  response.render("thankyou.hbs");
+});
+
+app.post("/submit", function(request, response){
+  console.log(request.body);
+  response.redirect("/thank-you");
+});
+
+app.get("/search", function(request, response, next){
+  var term = request.query.searchTerm;
+  var query = "SELECT * FROM restaurant WHERE restaurant.name ILIKE '%$1#%'";
+  db.any(query,term)
+    .then(function(resultsArray){
+      response.render("search_results.hbs", {
+        results: resultsArray
+      });
+    })
+    .catch(next);
+});
 
 app.listen(8000, function(){
   console.log("Listening on port 8000");
